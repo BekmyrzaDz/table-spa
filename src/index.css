@@ -1,1 +1,19 @@
+a {
+    text-decoration: none;
+    display: block;
+    color: #000000;
+}
+
+button {
+    cursor: pointer;
+    outline: none;
+    border: none;
+}
+
+* {
+    font-family: "Roboto", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 

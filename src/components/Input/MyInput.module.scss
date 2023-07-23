@@ -1,0 +1,30 @@
+@import '../../sass/base';
+
+.wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  font-family: Roboto;
+  background: $gray-color;
+  color: $white-color;
+  width: 100%;
+  height: 44px;
+  padding: 18px 26px;
+  font-style: normal;
+  border: none;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 21px;
+
+  &:focus {
+    outline: 2px solid $gray-color-2;
+  }
+}
+
+::placeholder {
+  font-family: Roboto;
+  color: $gray-color-2;
+}
