@@ -1,8 +1,9 @@
 export interface IPostsState {
   posts: IPost[] | []
+  filteredPosts: IPost[] | []
+  isSorted: boolean
   isLoading: boolean
   isError: boolean
-  toSorted: boolean
 }
 
 export interface IPost {

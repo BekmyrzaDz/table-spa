@@ -6,9 +6,10 @@ import {
 
 const initialState: IPostsState = {
   posts: [],
+  filteredPosts: [],
+  isSorted: false,
   isLoading: false,
   isError: false,
-  toSorted: false,
 }
 
 export const postsSlice = createSlice({
@@ -16,21 +17,31 @@ export const postsSlice = createSlice({
   initialState,
   reducers: {
     postsSortById: (state): void => {
-      if (state.toSorted) {
-        state.posts = state.posts.sort((a, b) => a.id - b.id)
-        state.toSorted = false
+      if (state.isSorted) {
+        state.filteredPosts = state.posts.sort((a, b) => a.id - b.id)
+        state.isSorted = false
       } else {
-        state.posts = state.posts.sort((a, b) =>  b.id - a.id)
-        state.toSorted = true
+        state.filteredPosts = state.posts.sort((a, b) => b.id - a.id)
+        state.isSorted = true
       }
     },
     postsSortByTitleAndDescription: (state): void => {
-      if (state.toSorted) {
-        state.posts = state.posts.sort((a, b) => a.title.localeCompare(b.title))
-        state.toSorted = false
+      if (state.isSorted) {
+        state.filteredPosts = state.posts.sort((a, b) => a.title.localeCompare(b.title))
+        state.isSorted = false
       } else {
-        state.posts = state.posts.sort((a, b) => b.title.localeCompare(a.title))
-        state.toSorted = true
+        state.filteredPosts = state.posts.sort((a, b) => b.title.localeCompare(a.title))
+        state.isSorted = true
+      }
+    },
+    postsSearch: (state, action: PayloadAction<string>): IPostsState => {
+      return {
+        ...state,
+        filteredPosts: [...state.posts]
+          .filter(post =>
+            post.title.toLowerCase().includes(action.payload.toLowerCase()) ||
+            post.body.toLowerCase().includes(action.payload.toLowerCase()) ||
+            post.id.toString().includes(action.payload.toString()))
       }
     },
   },
@@ -44,6 +55,7 @@ export const postsSlice = createSlice({
         (state: IPostsState, action: PayloadAction<IPost[]>): void => {
           state.isLoading = false
           state.posts = action.payload
+          state.filteredPosts = [...state.posts]
         }
       )
       .addCase(getPosts.rejected, (state: IPostsState): void => {
@@ -54,5 +66,5 @@ export const postsSlice = createSlice({
   },
 })
 
-export const {postsSortById, postsSortByTitleAndDescription} = postsSlice.actions
+export const {postsSortById, postsSortByTitleAndDescription, postsSearch} = postsSlice.actions
 export default postsSlice.reducer

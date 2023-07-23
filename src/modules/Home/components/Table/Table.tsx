@@ -28,7 +28,7 @@ export const Table: FC<ITableProps> = ({posts, columns}) => {
     <table className={styles.table}>
       <thead>
         <tr>
-          {columns.map(column => (
+          {columns?.map(column => (
             <th key={column.field} className={styles.headCell}>
               <span onClick={() => clickHandler(column?.headerName)}>
                 {column?.headerName}
@@ -39,13 +39,13 @@ export const Table: FC<ITableProps> = ({posts, columns}) => {
         </tr>
       </thead>
       <tbody>
-      {posts.map(post => (
-        <tr key={post.id}>
-          <td className={clsx(styles.bodyCell, styles.bodyCellId)}>{post?.id}</td>
-          <td className={styles.bodyCell}>{post?.title}</td>
-          <td className={styles.bodyCell}>{post?.body}</td>
-        </tr>
-      ))}
+        {posts?.map(post => (
+          <tr key={post?.id}>
+            <td className={clsx(styles.bodyCell, styles.bodyCellId)}>{post?.id}</td>
+            <td className={styles.bodyCell}>{post?.title}</td>
+            <td className={styles.bodyCell}>{post?.body}</td>
+          </tr>
+        ))}
       </tbody>
     </table>
   );
