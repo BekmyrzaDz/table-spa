@@ -1,3 +1,4 @@
+// Slices types
 export interface IPostsState {
   posts: IPost[] | []
   filteredPosts: IPost[] | []
@@ -13,12 +14,14 @@ export interface IPost {
   userId: number
 }
 
-export interface IColumns {
-  field: string
-  headerName: string
-}
-
+// Actions types
 export interface IParams {
   page: number
   limit: number
+}
+
+// Component types
+export interface IColumns {
+  field: string
+  headerName: string
 }

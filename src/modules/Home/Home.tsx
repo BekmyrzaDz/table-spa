@@ -1,20 +1,36 @@
+// Hooks
 import {FC, useEffect, useState} from 'react'
-import {Link} from 'react-router-dom'
-import {getPosts} from "./redux/asyncActions.ts"
 import {useAppDispatch, useAppSelector} from "../../hooks/redux.ts"
-import {IColumns, IPostsState} from "./types/types.ts"
+
+// Libraries
+import {Link} from 'react-router-dom'
 import {Box, Pagination, PaginationItem, Stack} from "@mui/material"
+
+// Actions
+import {getPosts} from "./redux/asyncActions.ts"
+
+// Components
 import {Table} from "./components/Table/Table.tsx"
-import * as React from "react"
+
+// Types
+import {IColumns, IPostsState} from "./types/types.ts"
 
 export const Home: FC = () => {
-  const {posts, filteredPosts, isLoading}: IPostsState = useAppSelector(state => state?.posts)
+  const {
+    posts,
+    filteredPosts,
+    isLoading
+  }: IPostsState = useAppSelector(state => state?.posts)
   const dispatch = useAppDispatch()
 
   const [page, setPage] = useState<number>(1)
 
   const limit = 10
-  const pageQty = 10
+  const pageQyt = 10
+
+  if (pageQyt < page) {
+    setPage(1)
+  }
 
   useEffect(() => {
     dispatch(getPosts({page, limit}))
@@ -29,7 +45,14 @@ export const Home: FC = () => {
   return (
     <>
       {isLoading ? (
-        <h1 style={{textAlign: 'center'}}>Loading...</h1>
+        <h2
+          style={{
+            textAlign: 'center',
+            fontFamily: 'Roboto',
+            fontWeight: 500,
+            fontSize: 18
+          }}
+        >Loading...</h2>
       ) : (
         <Box sx={{width: '100%', height: '100%', paddingBottom: '12px'}}>
           <Stack spacing={2}>
@@ -40,7 +63,7 @@ export const Home: FC = () => {
                 justifyContent: 'space-around',
               }}>
                 <Pagination
-                  count={pageQty}
+                  count={pageQyt}
                   page={page}
                   onChange={(_: React.ChangeEvent<unknown>, num: number) => setPage(num)}
                   sx={{marginX: 3, marginY: 'auto'}}
@@ -93,7 +116,6 @@ export const Home: FC = () => {
             )}
           </Stack>
         </Box>
-
       )}
     </>
   )

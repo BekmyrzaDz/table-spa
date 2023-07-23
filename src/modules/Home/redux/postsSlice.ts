@@ -1,8 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
+import {getPosts} from './asyncActions'
 import {IPost, IPostsState} from '../types/types.ts'
-import {
-  getPosts
-} from './asyncActions'
 
 const initialState: IPostsState = {
   posts: [],
@@ -12,6 +10,7 @@ const initialState: IPostsState = {
   isError: false,
 }
 
+// Posts Slice
 export const postsSlice = createSlice({
   name: 'posts',
   initialState,

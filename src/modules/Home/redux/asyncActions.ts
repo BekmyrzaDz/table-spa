@@ -1,4 +1,3 @@
-// Get all students on study
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {AxiosError} from "axios";
 import { toast } from 'react-toastify'

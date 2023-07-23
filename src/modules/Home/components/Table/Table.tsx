@@ -1,10 +1,21 @@
+// Hooks
 import {FC} from 'react'
-import {IColumns, IPost} from "../../types/types.ts";
-import styles from './Table.module.scss'
-import {clsx} from "clsx";
-import arrowDown from '../../../../assets/icons/arrow-down.svg'
-import {useAppDispatch} from "../../../../hooks/redux.ts";
+import {useAppDispatch} from "../../../../hooks/redux.ts"
+
+// Libraries
+import {clsx} from "clsx"
+
+// Slices
 import {postsSortById, postsSortByTitleAndDescription} from "../../redux/postsSlice.ts";
+
+// Images
+import arrowDown from '../../../../assets/icons/arrow-down.svg'
+
+// Styles
+import styles from './Table.module.scss'
+
+// Types
+import {IColumns, IPost} from "../../types/types.ts"
 
 interface ITableProps {
   posts: IPost[]
