@@ -9,12 +9,13 @@ import * as React from "react"
 
 export const Home: FC = () => {
   const dispatch = useAppDispatch()
+
   const posts: IPostsState = useAppSelector(state => state?.posts)
 
-  const [limit, setLimit] = useState<number>(10)
   const [page, setPage] = useState<number>(1)
-  const [pageQty, setPageQty] = useState<number>(10)
-  console.log(posts)
+
+  const limit = 10
+  const pageQty = 10
 
   useEffect(() => {
     dispatch(getPosts({page, limit}))

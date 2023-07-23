@@ -14,7 +14,7 @@ export const getPosts = createAsyncThunk<
   'posts/getPosts',
   async ({page, limit}, {rejectWithValue}) => {
     try {
-      const response = await postsService.getPosts({page, limit})
+      const response: IPost[] = await postsService.getPosts({page, limit})
 
       return response
     } catch (error: unknown) {
