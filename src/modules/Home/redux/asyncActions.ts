@@ -1,6 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {AxiosError} from "axios";
-import { toast } from 'react-toastify'
 import postsService from "../services/posts.ts";
 import {IPost, IParams} from "../types/types.ts";
 
@@ -17,9 +16,7 @@ export const getPosts = createAsyncThunk<
 
       return response
     } catch (error: unknown) {
-      console.log('error', error)
       if (typeof error === 'string') {
-        toast.error(error)
         return rejectWithValue(error)
       }
       if (error instanceof AxiosError) {
@@ -30,7 +27,6 @@ export const getPosts = createAsyncThunk<
             error.response?.data?.message) ||
           error.message ||
           error.toString()
-        toast.error(message)
         return rejectWithValue(message)
       }
       throw error
