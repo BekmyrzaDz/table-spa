@@ -13,7 +13,7 @@
       font-size: 14px;
       line-height: 19.28px;
 
-      span {
+      div {
         cursor: pointer;
 
         .arrowDownImg {
@@ -26,18 +26,28 @@
     }
   }
 
+  tbody {
+    .bodyCell {
+      padding: 15px 12px;
+      border: 1px solid #E3E6EC;
+      font-family: 'Roboto';
+      font-weight: 500;
+      font-size: 13px;
+      line-height: 17.9px;
+    }
 
-  .bodyCell {
-    padding: 15px 12px;
-    border: 1px solid #E3E6EC;
-    font-family: 'Roboto';
-    font-weight: 500;
-    font-size: 13px;
-    line-height: 17.9px;
-  }
+    .bodyCellId {
+      max-width: 110px;
+      text-align: center;
+    }
 
-  .bodyCellId {
-    padding: 28px 51px 36px;
+    .bodyCellTitle {
+      max-width: 529px;
+    }
+
+    .bodyCellDescr {
+      max-width: 432px;
+    }
   }
 }
 

@@ -41,10 +41,10 @@ export const Table: FC<ITableProps> = ({posts, columns}) => {
         <tr>
           {columns?.map(column => (
             <th key={column.field} className={styles.headCell}>
-              <span onClick={() => clickHandler(column?.headerName)}>
+              <div onClick={() => clickHandler(column?.headerName)}>
                 {column?.headerName}
                 <img className={styles.arrowDownImg} src={arrowDown} alt="arrow-down"/>
-              </span>
+              </div>
             </th>
           ))}
         </tr>
@@ -53,8 +53,8 @@ export const Table: FC<ITableProps> = ({posts, columns}) => {
         {posts?.map(post => (
           <tr key={post?.id}>
             <td className={clsx(styles.bodyCell, styles.bodyCellId)}>{post?.id}</td>
-            <td className={styles.bodyCell}>{post?.title}</td>
-            <td className={styles.bodyCell}>{post?.body}</td>
+            <td className={clsx(styles.bodyCell, styles.bodyCellTitle)}>{post?.title}</td>
+            <td className={clsx(styles.bodyCell, styles.bodyCellDescr)}>{post?.body}</td>
           </tr>
         ))}
       </tbody>

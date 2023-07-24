@@ -29,10 +29,6 @@ export const Home: FC = () => {
   const limit = 10
   const pageQyt = 10
 
-  if (pageQyt < page) {
-    setPage(1)
-  }
-
   useEffect(() => {
     dispatch(getPosts({page, limit}))
   }, [dispatch, page])
@@ -76,7 +72,7 @@ export const Home: FC = () => {
                     display: 'flex',
                     justifyContent: 'center',
 
-                    'li:first-child': {
+                    'li:nth-of-type(1)': {
                       alignSelf: 'flex-start',
                       marginRight: '20%',
                       '& a': {
