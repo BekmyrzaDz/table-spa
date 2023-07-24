@@ -15,25 +15,25 @@ export const postsSlice = createSlice({
   name: 'posts',
   initialState,
   reducers: {
-    postsSortById: (state): void => {
+    sortPostsById: (state): void => {
       if (state.isSorted) {
-        state.filteredPosts = state.posts.sort((a, b) => a.id - b.id)
+        state.filteredPosts = state.filteredPosts.sort((a, b) => a.id - b.id)
         state.isSorted = false
       } else {
-        state.filteredPosts = state.posts.sort((a, b) => b.id - a.id)
+        state.filteredPosts = state.filteredPosts.sort((a, b) => b.id - a.id)
         state.isSorted = true
       }
     },
-    postsSortByTitleAndDescription: (state): void => {
+    sortPostsByTitleAndDescription: (state): void => {
       if (state.isSorted) {
-        state.filteredPosts = state.posts.sort((a, b) => a.title.localeCompare(b.title))
+        state.filteredPosts = state.filteredPosts.sort((a, b) => a.title.localeCompare(b.title))
         state.isSorted = false
       } else {
-        state.filteredPosts = state.posts.sort((a, b) => b.title.localeCompare(a.title))
+        state.filteredPosts = state.filteredPosts.sort((a, b) => b.title.localeCompare(a.title))
         state.isSorted = true
       }
     },
-    postsSearch: (state, action: PayloadAction<string>): IPostsState => {
+    searchPosts: (state, action: PayloadAction<string>): IPostsState => {
       return {
         ...state,
         filteredPosts: [...state.posts]
@@ -65,5 +65,5 @@ export const postsSlice = createSlice({
   },
 })
 
-export const {postsSortById, postsSortByTitleAndDescription, postsSearch} = postsSlice.actions
+export const {sortPostsById, sortPostsByTitleAndDescription, searchPosts} = postsSlice.actions
 export default postsSlice.reducer

@@ -6,7 +6,7 @@ import {useAppDispatch} from "../../../../hooks/redux.ts"
 import {clsx} from "clsx"
 
 // Slices
-import {postsSortById, postsSortByTitleAndDescription} from "../../redux/postsSlice.ts";
+import {sortPostsById, sortPostsByTitleAndDescription} from "../../redux/postsSlice.ts";
 
 // Images
 import arrowDown from '../../../../assets/icons/arrow-down.svg'
@@ -27,11 +27,11 @@ export const Table: FC<ITableProps> = ({posts, columns}) => {
 
   const clickHandler = (value: string): void => {
     if (value.toLowerCase() === 'ID'.toLowerCase()) {
-      dispatch(postsSortById())
+      dispatch(sortPostsById())
     } else if (value.toLowerCase() === 'Заголовок'.toLowerCase()) {
-      dispatch(postsSortByTitleAndDescription())
+      dispatch(sortPostsByTitleAndDescription())
     } else if (value.toLowerCase() === 'Описание'.toLowerCase()) {
-      dispatch(postsSortByTitleAndDescription())
+      dispatch(sortPostsByTitleAndDescription())
     }
   }
 

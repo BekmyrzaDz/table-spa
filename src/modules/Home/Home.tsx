@@ -23,7 +23,8 @@ export const Home: FC = () => {
   }: IPostsState = useAppSelector(state => state?.posts)
   const dispatch = useAppDispatch()
 
-  const [page, setPage] = useState<number>(1)
+  const currentPage: string = JSON.parse(localStorage.getItem('currentPage') as string)
+  const [page, setPage] = useState<number>(parseInt(currentPage as string) || 1)
 
   const limit = 10
   const pageQyt = 10
@@ -42,6 +43,11 @@ export const Home: FC = () => {
     {field: 'body', headerName: 'Описание'},
   ];
 
+  const changeHandler = (num: number): void => {
+    setPage(num)
+    localStorage.setItem('currentPage', JSON.stringify(num))
+  }
+
   return (
     <>
       {isLoading ? (
@@ -58,61 +64,79 @@ export const Home: FC = () => {
           <Stack spacing={2}>
             <Table posts={filteredPosts} columns={columns}/>
             {posts && (
-              <Box sx={{
-                display: 'flex',
-                justifyContent: 'space-around',
-              }}>
-                <Pagination
-                  count={pageQyt}
-                  page={page}
-                  onChange={(_: React.ChangeEvent<unknown>, num: number) => setPage(num)}
-                  sx={{marginX: 3, marginY: 'auto'}}
-                  renderItem={
-                    (item) => (
-                      <PaginationItem
-                        component={Link}
-                        to={`/?page=${item.page}`}
-                        components={{
-                          next: (props) =>
-                            <button
-                              {...props}
-                              style={{
-                                padding: 20,
-                                border: 'none',
-                                font: 'inherit',
-                                color: 'inherit',
-                                backgroundColor: 'transparent',
-                              }}
-                            >Далее</button>,
-                          previous: (props) =>
-                            <button
-                              {...props}
-                              style={{
-                                padding: 20,
-                                border: 'none',
-                                font: 'inherit',
-                                color: 'inherit',
-                                backgroundColor: 'transparent',
-                              }}
-                            >Назад</button>
-                        }}
-                        sx={{
-                          '& MuiButtonBase-root': {
-                            padding: 20,
-                            border: 'none',
-                            font: 'inherit',
-                            color: 'inherit',
-                            backgroundColor: 'transparent',
+              <Pagination
+                count={pageQyt}
+                page={page}
+                onChange={(_: React.ChangeEvent<unknown>, num: number) => changeHandler(num)}
+                sx={{
+                  marginX: 3,
+                  marginY: 'auto',
+
+                  '.MuiPagination-ul': {
+                    display: 'flex',
+                    justifyContent: 'center',
+
+                    'li:first-child': {
+                      alignSelf: 'flex-start',
+                      marginRight: '20%',
+                      '& a': {
+                        '& button': {
+                            fontFamily: 'Roboto',
+                            fontSize: '24px',
+                            fontWeight: 500,
+                            color: '#474955',
+                          '& span': {
                           },
-                          '& .MuiPaginationItem-icon': {
-                            margin: '0 115px'
-                          }
-                        }}
-                        {...item}
-                      />
-                    )}
-                />
-              </Box>
+                        },
+                      },
+                    },
+                    'li:last-child': {
+                      alignSelf: 'flex-end',
+                      marginLeft: '20%',
+                      '& a': {
+                        '& button': {
+                          fontFamily: 'Roboto',
+                          fontSize: '24px',
+                          fontWeight: 500,
+                          color: '#474955',
+                          '& span': {
+                          },
+                        },
+                      },
+                    },
+                  },
+                }}
+                renderItem={
+                  (item) => (
+                    <PaginationItem
+                      component={Link}
+                      to={`/?page=${item.page}`}
+                      components={{
+                        next: (props) =>
+                          <button
+                            {...props}
+                            style={{
+                              padding: 20,
+                              border: 'none',
+                              color: 'inherit',
+                              backgroundColor: 'transparent',
+                            }}
+                          >Далее</button>,
+                        previous: (props) =>
+                          <button
+                            {...props}
+                            style={{
+                              padding: 20,
+                              border: 'none',
+                              color: 'inherit',
+                              backgroundColor: 'transparent',
+                            }}
+                          >Назад</button>
+                      }}
+                      {...item}
+                    />
+                  )}
+              />
             )}
           </Stack>
         </Box>

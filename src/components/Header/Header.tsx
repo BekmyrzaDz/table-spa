@@ -1,7 +1,7 @@
 // Hooks
 import {FC, useEffect, useState} from 'react'
 import {useAppDispatch} from "../../hooks/redux.ts"
-import {postsSearch} from "../../modules/Home/redux/postsSlice.ts"
+import {searchPosts} from "../../modules/Home/redux/postsSlice.ts"
 
 // Components
 import {Input} from '../Input/MyInput.tsx'
@@ -14,7 +14,7 @@ export const Header: FC = () => {
   const [searchValue, setSearchValue] = useState('')
 
   useEffect(() => {
-    dispatch(postsSearch(searchValue))
+    dispatch(searchPosts(searchValue))
   }, [dispatch, searchValue])
 
   return (
